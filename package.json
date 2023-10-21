@@ -1,0 +1,21 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./app.js",
+    "start": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnaGolmakova/movies-explorer-api.git"
+  },
+  "author": "Anna Golmakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnnaGolmakova/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/AnnaGolmakova/movies-explorer-api#readme"
+}
