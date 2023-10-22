@@ -5,14 +5,9 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 
-const users = require('./routes/users');
-const movies = require('./routes/movies');
+const router = require('./routes/index');
 
-const { login, createUser } = require('./controllers/users');
-
-const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { validateLogin, validateRegister } = require('./middlewares/validation');
 const errorHandler = require('./middlewares/error-handler');
 const { cors } = require('./middlewares/cors');
 
@@ -31,18 +26,7 @@ app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
-app.post('/signin', validateLogin, login);
-app.post('/signup', validateRegister, createUser);
-
-app.use(auth);
-app.use('/users', users);
-app.use('/movies', movies);
+app.use('/', router);
 
 app.use((req, res, next) => {
   next(new NotFoundError('Неправильный запрос API'));
