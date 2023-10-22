@@ -4,12 +4,14 @@ const { DB_URL = 'mongodb://localhost:27017/bitfilmsdb', PORT = 3000 } = process
 
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
-const { cors } = require('./middlewares/cors');
+const limiter = require('./middlewares/rate-limiter');
+const cors = require('./middlewares/cors');
 
 const router = require('./routes/index');
 
@@ -19,7 +21,9 @@ mongoose.connect(DB_URL, {
   useNewUrlParser: true,
 });
 
+app.use(limiter);
 app.use(cors);
+app.use(helmet());
 app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());

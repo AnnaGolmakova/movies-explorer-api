@@ -1,12 +1,12 @@
 const allowedCors = [
-  'https://golmakova.nomoredomainsrocks.ru',
-  'http://golmakova.nomoredomainsrocks.ru',
+  'https://movies.golmakova.nomoredomainsrocks.ru',
+  'http://movies.golmakova.nomoredomainsrocks.ru',
   'localhost:3000',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-module.exports.cors = (req, res, next) => {
+module.exports = (req, res, next) => {
   const { method } = req;
   const { origin } = req.headers;
   const requestHeaders = req.headers['access-control-request-headers'];
